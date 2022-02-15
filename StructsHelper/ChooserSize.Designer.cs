@@ -52,11 +52,6 @@
             this.cbTypes.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.cbTypes.FormattingEnabled = true;
             this.cbTypes.IntegralHeight = false;
-            this.cbTypes.Items.AddRange(new object[] {
-            "byte",
-            "short",
-            "int",
-            "float"});
             this.cbTypes.Location = new System.Drawing.Point(25, 49);
             this.cbTypes.Name = "cbTypes";
             this.cbTypes.Size = new System.Drawing.Size(120, 21);

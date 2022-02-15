@@ -12,14 +12,14 @@ namespace StructsHelper
 {
     public partial class ChooserSize : Form
     {
-        public int g_nSelectedType { get; set; }
-        public int g_nSelectedTypeId { get; set; }
+        public int g_nSelectedTypeSize { get; set; }
         public int g_nSelectedSize { get; set; }
+        public int g_nSelectedTypeIndex { get; set; }
 
         private void RecalculateSize()
         {
             int number_actual = int.Parse(tbSize.Text);
-            int selected_type = cbTypes.SelectedIndex == 2 ? 4 : cbTypes.SelectedIndex + 1;
+            int selected_type = TypesDB.Instance.GetSizeByTypeId(cbTypes.SelectedIndex);
 
 #if DEBUG
             this.Text = number_actual + ";" + selected_type;
@@ -39,8 +39,7 @@ namespace StructsHelper
         {
             InitializeComponent();
 
-            g_nSelectedType = -1;
-            g_nSelectedTypeId = -1;
+            g_nSelectedTypeSize = -1;
             g_nSelectedSize = 0;
 
             if (bChangeSize)
@@ -65,8 +64,15 @@ namespace StructsHelper
                 tbSize.Text = g_nSelectedSize.ToString();
             }
 
-            cbTypes.SelectedIndex = 2;
             cbTypes.SelectedIndexChanged += Debug_HandleComboBoxIndexChange;
+
+            //  Fill all possible types from TypesDB.
+            foreach (TypesDB.TypeInfo type in TypesDB.Instance.typeslist)
+            {
+                cbTypes.Items.Add(type.ToString());
+            }
+
+            cbTypes.SelectedIndex = 0;
         }
 
         private void Debug_HandleComboBoxIndexChange(object sender, EventArgs e)
@@ -80,27 +86,8 @@ namespace StructsHelper
 
         private void btOk_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.OK;
-
-            switch (cbTypes.SelectedIndex)
-            {
-                case 0:
-                    this.g_nSelectedType = 1;
-                    this.g_nSelectedTypeId = 1;
-                    break;
-                case 1:
-                    this.g_nSelectedType = 2;
-                    this.g_nSelectedTypeId = 2;
-                    break;
-                case 2:
-                    this.g_nSelectedType = 4;
-                    this.g_nSelectedTypeId = 4;
-                    break;
-                case 3:
-                    this.g_nSelectedType = 4;
-                    this.g_nSelectedTypeId = 5;
-                    break;
-            }
+            this.g_nSelectedTypeSize = TypesDB.Instance.GetSizeByTypeId(cbTypes.SelectedIndex);
+            this.g_nSelectedTypeIndex = cbTypes.SelectedIndex;
 
             if (!tbSize.Visible)
             {
@@ -110,11 +97,19 @@ namespace StructsHelper
 
             this.g_nSelectedSize = int.Parse(tbSize.Text);
 
-            if (g_nSelectedSize % g_nSelectedType != 0)
+            if (g_nSelectedSize % g_nSelectedTypeSize != 0)
             {
-                int closest_size = g_nSelectedSize - ((g_nSelectedSize / g_nSelectedType) * g_nSelectedType);
+                int closest_size = g_nSelectedSize - ((g_nSelectedSize / g_nSelectedTypeSize) * g_nSelectedTypeSize);
                 this.g_nSelectedSize -= closest_size;
             }
+
+            if (g_nSelectedSize < g_nSelectedTypeSize)
+            {
+                MessageBox.Show("Structure size cannot be less than the size of the type it's made of!");
+                return;
+            }
+
+            this.DialogResult = DialogResult.OK;
 
             this.Close();
         }

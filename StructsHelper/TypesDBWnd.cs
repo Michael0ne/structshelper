@@ -27,12 +27,6 @@ namespace StructsHelper
             this.Left = (Screen.PrimaryScreen.Bounds.Width / 2) - (this.Width / 2);
             this.Top = (Screen.PrimaryScreen.Bounds.Height / 2) - (this.Height / 2);
 
-            //  Register builtin types.
-            TypesDB.Instance.RegisterBuiltinType("char", 1);
-            TypesDB.Instance.RegisterBuiltinType("bool", 1);
-            TypesDB.Instance.RegisterBuiltinType("short", 2);
-            TypesDB.Instance.RegisterBuiltinType("int", 4);
-
             //  Propagate list with types.
             lbTypesList.Items.Clear();
             foreach (TypesDB.TypeInfo ti in TypesDB.Instance.typeslist)

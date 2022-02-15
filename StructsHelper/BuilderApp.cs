@@ -34,33 +34,12 @@ namespace StructsHelper
         };
 
         //  Version info.
-        private const int nVersion = 102;   //  Digits: 1 = major, 2 = minor, 3 = build.
+        private const int nVersion = 103;   //  Digits: 1 = major, 2 = minor, 3 = build.
 
         private string[] sAboutInfo =
         {
             "About program",
             "Structures builder helper\nVersion: " + nVersion / 100 + "." + nVersion % 100 + "\nDesigned to be used at home."
-        };
-
-        //  Types info.
-        private enum eTypeIds
-        {
-            TYPE_UNSET,
-            TYPE_BYTE,
-            TYPE_SHORT,
-            TYPE_UNSET_3,
-            TYPE_INT,
-            TYPE_FLOAT
-        };
-
-        private string[] sTypes =
-        {
-            "dummy",
-            "byte",
-            "short",
-            "dummy",
-            "int",
-            "float"
         };
 
         //  Table to hold current structure information.
@@ -69,7 +48,6 @@ namespace StructsHelper
             public int m_nSize;
             public int m_nCreatedWithType;
             public int m_nElementsCount;
-            public int m_nCreatedWithTypeId;
         };
 
         private StrucInfo g_StrucInfo;
@@ -139,14 +117,14 @@ namespace StructsHelper
                 if (result == DialogResult.OK)
                 {
                     g_StrucInfo.m_nSize = dialog.g_nSelectedSize;
-                    g_StrucInfo.m_nCreatedWithType = dialog.g_nSelectedType;
+                    g_StrucInfo.m_nCreatedWithType = dialog.g_nSelectedTypeSize;
                     g_StrucInfo.m_nElementsCount = (g_StrucInfo.m_nSize / g_StrucInfo.m_nCreatedWithType);
-                    g_StrucInfo.m_nCreatedWithTypeId = dialog.g_nSelectedTypeId;
 
                     int currOffset = 0;
+                    string typeName = TypesDB.Instance.GetTypeNameById(dialog.g_nSelectedTypeIndex);
                     while (currOffset < g_StrucInfo.m_nSize)
                     {
-                        lbStruc.Items.Add(sTypes[g_StrucInfo.m_nCreatedWithTypeId] + "\tfield_" + currOffset.ToString("X"));
+                        lbStruc.Items.Add(typeName + "\tfield_" + currOffset.ToString("X"));
 
                         currOffset += g_StrucInfo.m_nCreatedWithType;
                     }
@@ -197,7 +175,8 @@ namespace StructsHelper
                 DialogResult result = dialog.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    int desired_type = dialog.g_nSelectedType;
+                    int desired_type = dialog.g_nSelectedTypeSize;
+                    string typeName = TypesDB.Instance.GetTypeNameById(dialog.g_nSelectedTypeIndex);
 
                     string field_text = (String)lbStruc.SelectedItem;
                     string field_type = field_text.Substring(0, field_text.IndexOf('\t'));
@@ -220,7 +199,7 @@ namespace StructsHelper
                     if (desired_type > field_size)
                         tsInfo.Text = "Structure has grown by " + desired_type + " bytes!";
 
-                    lbStruc.Items[lbStruc.SelectedIndex] = sTypes[desired_type] + "\tfield_" + field_offset;
+                    lbStruc.Items[lbStruc.SelectedIndex] = typeName + "\tfield_" + field_offset;
                 }
 
                 dialog.Dispose();
