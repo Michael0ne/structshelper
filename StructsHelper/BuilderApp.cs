@@ -34,7 +34,7 @@ namespace StructsHelper
         };
 
         //  Version info.
-        private const int nVersion = 103;   //  Digits: 1 = major, 2 = minor, 3 = build.
+        private const int nVersion = 104;   //  Digits: 1 = major, 2 = minor, 3 = build.
 
         private string[] sAboutInfo =
         {
@@ -208,6 +208,21 @@ namespace StructsHelper
 
         private void MenuStripClick_Pack(object sender, EventArgs e)
         {
+            //  Don't do anything if created with type size 1 (char).
+            if (g_StrucInfo.m_nCreatedWithType == 1)
+                return;
+
+            //  Convert selected field from whatever type it is into an array of smaller types (char).
+            string selectedItemText = lbStruc.Items[lbStruc.SelectedIndex].ToString();
+            string selectedItemType = selectedItemText.Substring(0, selectedItemText.IndexOf('_'));
+            int selectedItemOffset = Convert.ToInt32(selectedItemText.Substring(selectedItemText.IndexOf('_') + 1), 16);
+
+            int i = lbStruc.SelectedIndex;
+            for (; i < lbStruc.SelectedIndex + 4; ++i, ++selectedItemOffset)
+                lbStruc.Items[i] = "char\tfield_" + selectedItemOffset.ToString("X");
+
+            for (; i < lbStruc.Items.Count; ++i, selectedItemOffset += g_StrucInfo.m_nCreatedWithType)
+                lbStruc.Items[i] = selectedItemType + "_" + selectedItemOffset.ToString("X");
 
         }
 

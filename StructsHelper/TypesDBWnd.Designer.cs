@@ -31,13 +31,13 @@ namespace StructsHelper
         {
             this.lbTypesList = new System.Windows.Forms.ListBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.tbTypeName = new System.Windows.Forms.TextBox();
-            this.tbTypeSize = new System.Windows.Forms.TextBox();
-            this.btnTypeSave = new System.Windows.Forms.Button();
-            this.btnTypeReset = new System.Windows.Forms.Button();
             this.btnTypeNew = new System.Windows.Forms.Button();
+            this.btnTypeReset = new System.Windows.Forms.Button();
+            this.btnTypeSave = new System.Windows.Forms.Button();
+            this.tbTypeSize = new System.Windows.Forms.TextBox();
+            this.tbTypeName = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -46,7 +46,7 @@ namespace StructsHelper
             this.lbTypesList.FormattingEnabled = true;
             this.lbTypesList.Location = new System.Drawing.Point(12, 12);
             this.lbTypesList.Name = "lbTypesList";
-            this.lbTypesList.Size = new System.Drawing.Size(472, 355);
+            this.lbTypesList.Size = new System.Drawing.Size(214, 108);
             this.lbTypesList.TabIndex = 0;
             this.lbTypesList.SelectedIndexChanged += new System.EventHandler(this.lbTypesList_SelectedIndexChanged);
             // 
@@ -59,30 +59,49 @@ namespace StructsHelper
             this.groupBox1.Controls.Add(this.tbTypeName);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 373);
+            this.groupBox1.Location = new System.Drawing.Point(12, 126);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(472, 88);
+            this.groupBox1.Size = new System.Drawing.Size(214, 127);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Modify";
             // 
-            // label1
+            // btnTypeNew
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 25);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Name:";
+            this.btnTypeNew.Location = new System.Drawing.Point(147, 98);
+            this.btnTypeNew.Name = "btnTypeNew";
+            this.btnTypeNew.Size = new System.Drawing.Size(55, 23);
+            this.btnTypeNew.TabIndex = 6;
+            this.btnTypeNew.Text = "New...";
+            this.btnTypeNew.UseVisualStyleBackColor = true;
+            this.btnTypeNew.Click += new System.EventHandler(this.btnTypeNew_Click);
             // 
-            // label2
+            // btnTypeReset
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(14, 49);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(30, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Size:";
+            this.btnTypeReset.Location = new System.Drawing.Point(50, 72);
+            this.btnTypeReset.Name = "btnTypeReset";
+            this.btnTypeReset.Size = new System.Drawing.Size(75, 23);
+            this.btnTypeReset.TabIndex = 5;
+            this.btnTypeReset.Text = "Reset";
+            this.btnTypeReset.UseVisualStyleBackColor = true;
+            // 
+            // btnTypeSave
+            // 
+            this.btnTypeSave.Location = new System.Drawing.Point(127, 72);
+            this.btnTypeSave.Name = "btnTypeSave";
+            this.btnTypeSave.Size = new System.Drawing.Size(75, 23);
+            this.btnTypeSave.TabIndex = 4;
+            this.btnTypeSave.Text = "Save";
+            this.btnTypeSave.UseVisualStyleBackColor = true;
+            this.btnTypeSave.Click += new System.EventHandler(this.btnTypeSave_Click);
+            // 
+            // tbTypeSize
+            // 
+            this.tbTypeSize.Location = new System.Drawing.Point(50, 46);
+            this.tbTypeSize.MaxLength = 4;
+            this.tbTypeSize.Name = "tbTypeSize";
+            this.tbTypeSize.Size = new System.Drawing.Size(152, 20);
+            this.tbTypeSize.TabIndex = 3;
             // 
             // tbTypeName
             // 
@@ -93,48 +112,29 @@ namespace StructsHelper
             this.tbTypeName.TabIndex = 2;
             this.tbTypeName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbTypeName_KeyPress);
             // 
-            // tbTypeSize
+            // label2
             // 
-            this.tbTypeSize.Location = new System.Drawing.Point(50, 46);
-            this.tbTypeSize.MaxLength = 4;
-            this.tbTypeSize.Name = "tbTypeSize";
-            this.tbTypeSize.Size = new System.Drawing.Size(152, 20);
-            this.tbTypeSize.TabIndex = 3;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(14, 49);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(30, 13);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Size:";
             // 
-            // btnTypeSave
+            // label1
             // 
-            this.btnTypeSave.Location = new System.Drawing.Point(391, 59);
-            this.btnTypeSave.Name = "btnTypeSave";
-            this.btnTypeSave.Size = new System.Drawing.Size(75, 23);
-            this.btnTypeSave.TabIndex = 4;
-            this.btnTypeSave.Text = "Save";
-            this.btnTypeSave.UseVisualStyleBackColor = true;
-            this.btnTypeSave.Click += new System.EventHandler(this.btnTypeSave_Click);
-            // 
-            // btnTypeReset
-            // 
-            this.btnTypeReset.Location = new System.Drawing.Point(310, 59);
-            this.btnTypeReset.Name = "btnTypeReset";
-            this.btnTypeReset.Size = new System.Drawing.Size(75, 23);
-            this.btnTypeReset.TabIndex = 5;
-            this.btnTypeReset.Text = "Reset";
-            this.btnTypeReset.UseVisualStyleBackColor = true;
-            // 
-            // btnTypeNew
-            // 
-            this.btnTypeNew.Location = new System.Drawing.Point(249, 59);
-            this.btnTypeNew.Name = "btnTypeNew";
-            this.btnTypeNew.Size = new System.Drawing.Size(55, 23);
-            this.btnTypeNew.TabIndex = 6;
-            this.btnTypeNew.Text = "New...";
-            this.btnTypeNew.UseVisualStyleBackColor = true;
-            this.btnTypeNew.Click += new System.EventHandler(this.btnTypeNew_Click);
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 25);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(38, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Name:";
             // 
             // TypesDBWnd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(496, 473);
+            this.ClientSize = new System.Drawing.Size(237, 265);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.lbTypesList);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;

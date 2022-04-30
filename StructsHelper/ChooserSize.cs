@@ -16,9 +16,20 @@ namespace StructsHelper
         public int g_nSelectedSize { get; set; }
         public int g_nSelectedTypeIndex { get; set; }
 
+        private char LastPressedKey = (char)0;
+
         private void RecalculateSize()
         {
-            int number_actual = int.Parse(tbSize.Text);
+            //  Is hexidecimal?
+            if (tbSize.TextLength == 2 && tbSize.Text[0] == '0' && tbSize.Text[1] == 'x')
+                return;
+
+            int number_actual = -1;
+            if (tbSize.TextLength > 2 && tbSize.Text[0] == '0' && tbSize.Text[1] == 'x')
+                number_actual = Convert.ToInt32(tbSize.Text, 16);
+            else
+                number_actual = Convert.ToInt32(tbSize.Text);
+
             int selected_type = TypesDB.Instance.GetSizeByTypeId(cbTypes.SelectedIndex);
 
 #if DEBUG
@@ -86,6 +97,14 @@ namespace StructsHelper
 
         private void btOk_Click(object sender, EventArgs e)
         {
+            bool isHexadecimal = false;
+
+            if (tbSize.Text.Length == 2 && tbSize.Text[0] == '0' && tbSize.Text[1] == 'x')
+                return;
+
+            if (tbSize.Text.Length > 2 && tbSize.Text[0] == '0' && tbSize.Text[1] == 'x')
+                isHexadecimal = true;
+
             this.g_nSelectedTypeSize = TypesDB.Instance.GetSizeByTypeId(cbTypes.SelectedIndex);
             this.g_nSelectedTypeIndex = cbTypes.SelectedIndex;
 
@@ -95,7 +114,7 @@ namespace StructsHelper
                 return;
             }
 
-            this.g_nSelectedSize = int.Parse(tbSize.Text);
+            this.g_nSelectedSize = Convert.ToInt32(tbSize.Text, isHexadecimal ? 16 : 10);
 
             if (g_nSelectedSize % g_nSelectedTypeSize != 0)
             {
@@ -106,12 +125,12 @@ namespace StructsHelper
             if (g_nSelectedSize < g_nSelectedTypeSize)
             {
                 MessageBox.Show("Structure size cannot be less than the size of the type it's made of!");
-                return;
             }
-
-            this.DialogResult = DialogResult.OK;
-
-            this.Close();
+            else
+            {
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
         }
 
         private void tbSize_KeyPress(object sender, KeyPressEventArgs e)
@@ -127,6 +146,8 @@ namespace StructsHelper
                 Close();
                 return;
             }
+
+            LastPressedKey = e.KeyChar;
         }
 
         private void TbSize_TextChanged(object sender, EventArgs e)

@@ -37,7 +37,6 @@
             // 
             // btOk
             // 
-            this.btOk.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btOk.Location = new System.Drawing.Point(47, 105);
             this.btOk.Name = "btOk";
             this.btOk.Size = new System.Drawing.Size(75, 25);
