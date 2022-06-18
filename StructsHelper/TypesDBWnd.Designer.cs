@@ -38,6 +38,7 @@ namespace StructsHelper
             this.tbTypeName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnTypeRemove = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,6 +53,7 @@ namespace StructsHelper
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnTypeRemove);
             this.groupBox1.Controls.Add(this.btnTypeNew);
             this.groupBox1.Controls.Add(this.btnTypeReset);
             this.groupBox1.Controls.Add(this.btnTypeSave);
@@ -68,9 +70,9 @@ namespace StructsHelper
             // 
             // btnTypeNew
             // 
-            this.btnTypeNew.Location = new System.Drawing.Point(147, 98);
+            this.btnTypeNew.Location = new System.Drawing.Point(127, 98);
             this.btnTypeNew.Name = "btnTypeNew";
-            this.btnTypeNew.Size = new System.Drawing.Size(55, 23);
+            this.btnTypeNew.Size = new System.Drawing.Size(75, 23);
             this.btnTypeNew.TabIndex = 6;
             this.btnTypeNew.Text = "New...";
             this.btnTypeNew.UseVisualStyleBackColor = true;
@@ -130,6 +132,16 @@ namespace StructsHelper
             this.label1.TabIndex = 0;
             this.label1.Text = "Name:";
             // 
+            // btnTypeRemove
+            // 
+            this.btnTypeRemove.Location = new System.Drawing.Point(50, 98);
+            this.btnTypeRemove.Name = "btnTypeRemove";
+            this.btnTypeRemove.Size = new System.Drawing.Size(75, 23);
+            this.btnTypeRemove.TabIndex = 7;
+            this.btnTypeRemove.Text = "Remove";
+            this.btnTypeRemove.UseVisualStyleBackColor = true;
+            this.btnTypeRemove.Click += new System.EventHandler(this.btnTypeRemove_Click);
+            // 
             // TypesDBWnd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -163,5 +175,6 @@ namespace StructsHelper
         private System.Windows.Forms.Button btnTypeSave;
         private System.Windows.Forms.Button btnTypeReset;
         private System.Windows.Forms.Button btnTypeNew;
+        private System.Windows.Forms.Button btnTypeRemove;
     }
 }

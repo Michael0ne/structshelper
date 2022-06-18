@@ -18,6 +18,8 @@ namespace StructsHelper
 
             btnTypeSave.Enabled = false;
             btnTypeReset.Enabled = false;
+            btnTypeRemove.Enabled = false;
+
             tbTypeName.Enabled = false;
             tbTypeSize.Enabled = false;
         }
@@ -46,6 +48,7 @@ namespace StructsHelper
                 btnTypeNew.Enabled = true;
                 tbTypeName.Enabled = false;
                 tbTypeSize.Enabled = false;
+                btnTypeRemove.Enabled = false;
             }
             else
             {
@@ -54,6 +57,7 @@ namespace StructsHelper
                 btnTypeNew.Enabled = true;
                 tbTypeName.Enabled = true;
                 tbTypeSize.Enabled = true;
+                btnTypeRemove.Enabled = true;
             }
 
             tbTypeName.Text = ti.TypeName;
@@ -125,6 +129,24 @@ namespace StructsHelper
                     return;
                 }
             }
+        }
+
+        private void btnTypeRemove_Click(object sender, EventArgs e)
+        {
+            if (lbTypesList.SelectedIndex == -1)
+                return;
+
+            int spaceIndex = lbTypesList.SelectedItem.ToString().IndexOf(' ');
+            TypesDB.Instance.UnRegisterType(lbTypesList.SelectedItem.ToString().Substring(0, spaceIndex));
+            lbTypesList.Items.RemoveAt(lbTypesList.SelectedIndex);
+            lbTypesList.SelectedIndex = -1;
+
+            btnTypeSave.Enabled = false;
+            btnTypeReset.Enabled = false;
+            btnTypeRemove.Enabled = false;
+
+            tbTypeName.Enabled = false;
+            tbTypeSize.Enabled = false;
         }
     }
 }

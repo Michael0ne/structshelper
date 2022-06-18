@@ -78,6 +78,13 @@ namespace StructsHelper
                 return typeslist[id].TypeName;
         }
 
+        public void UnRegisterType(string name)
+        {
+            TypeInfo ti = typeslist.Find(tyinf => tyinf.TypeName == name);
+            if (ti != null)
+                typeslist.Remove(ti);
+        }
+
         public void RegisterType(string name, int size)
         {
             if (typeslist.Contains(new TypeInfo(name, size, false)) == false)
